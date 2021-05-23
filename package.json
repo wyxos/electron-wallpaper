@@ -1,0 +1,17 @@
+{
+  "name": "@wyxos/electron-wallpaper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "serve": "electron ./example",
+    "build": "node-gyp configure && node-gyp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^12.0.9"
+  }
+}
