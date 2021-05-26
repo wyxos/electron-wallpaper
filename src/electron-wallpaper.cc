@@ -10,15 +10,21 @@ using namespace std;
 
 HWND workerw = NULL;
 
-BOOL CALLBACK FindWorkerW(HWND hwnd, LPARAM param) {
-    HWND shelldll = FindWindowEx(hwnd, NULL, "SHELLDLL_DefView", NULL);
+BOOL CALLBACK
+FindWorkerW(HWND
+hwnd,
+LPARAM param
+) {
+HWND shelldll = FindWindowEx(hwnd, NULL, "SHELLDLL_DefView", NULL);
 
-    if (shelldll) {
-        workerw = FindWindowEx(NULL, hwnd, "WorkerW", NULL);
-        return FALSE;
-    }
+if (shelldll) {
+workerw = FindWindowEx(NULL, hwnd, "WorkerW", NULL);
+return
+FALSE;
+}
 
-    return TRUE;
+return
+TRUE;
 }
 
 namespace ElectronWallpaper {
@@ -34,11 +40,11 @@ namespace ElectronWallpaper {
     void Attach(const FunctionCallbackInfo <Value> &args) {
         Isolate *isolate = args.GetIsolate();
 
-        Local<Context> context = isolate->GetCurrentContext();
+        Local <Context> context = isolate->GetCurrentContext();
 
-        Local<String> appName = args[0].As<String>();
+        Local <String> appName = args[0].As<String>();
 
-        CHAR* charAppName = new CHAR[128];
+        CHAR *charAppName = new CHAR[128];
 
         (*appName)->WriteUtf8(isolate, charAppName);
 
@@ -68,17 +74,17 @@ namespace ElectronWallpaper {
     void Detach(const FunctionCallbackInfo <Value> &args) {
         Isolate *isolate = args.GetIsolate();
 
-        Local<Context> context = isolate->GetCurrentContext();
+        Local <Context> context = isolate->GetCurrentContext();
 
-        Local<String> appName = args[0].As<String>();
+        Local <String> appName = args[0].As<String>();
 
-        CHAR* charAppName = new CHAR[128];
+        CHAR *charAppName = new CHAR[128];
 
         (*appName)->WriteUtf8(isolate, charAppName);
 
         HWND target = FindWindowA(NULL, charAppName);
 
-        SetParent(target, NULL);
+        HWND previousParent = SetParent(target, workerw);
 
         args.GetReturnValue().Set(args[0]);
     }

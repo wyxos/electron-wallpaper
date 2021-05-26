@@ -10,37 +10,31 @@
     <Filter Include="C:">
       <UniqueIdentifier>{7B735499-E5DD-1C2B-6C26-70023832A1CF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users">
-      <UniqueIdentifier>{E9F714C1-DA89-54E2-60CF-39FEB20BF756}</UniqueIdentifier>
+    <Filter Include="C:\code">
+      <UniqueIdentifier>{AAB9748B-7F78-2868-73F9-3D157EBB12A8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj">
-      <UniqueIdentifier>{D20AFC20-BAD3-5851-E763-FBB87A6889F2}</UniqueIdentifier>
+    <Filter Include="C:\code\personal">
+      <UniqueIdentifier>{763DBDF3-B740-A2BC-34C6-4A355F1B9C0D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData">
-      <UniqueIdentifier>{F852EB63-437C-846A-220F-8D9ED6DAEC1D}</UniqueIdentifier>
+    <Filter Include="C:\code\personal\js">
+      <UniqueIdentifier>{AFF4C650-55EE-4B49-D17B-E3562B397D81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming">
-      <UniqueIdentifier>{D51E5808-912B-5C70-4BB7-475D1DBFA067}</UniqueIdentifier>
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper">
+      <UniqueIdentifier>{08009A06-6017-08A3-FD50-497AF1FAC811}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm">
-      <UniqueIdentifier>{1B85D12A-9F9C-E0A8-F82E-74864675B527}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0">
-      <UniqueIdentifier>{4406B365-5A11-5CA4-566C-CEE8251AD6AA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules">
       <UniqueIdentifier>{56DF7A98-063D-FB9D-485C-089023B4C16A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules\npm">
-      <UniqueIdentifier>{741E0E76-39B2-B1AB-9FA1-F1A20B16F295}</UniqueIdentifier>
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild">
+      <UniqueIdentifier>{BFF076C8-AFEB-C7D4-3C7F-551213D89951}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules\npm\node_modules">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules">
       <UniqueIdentifier>{56DF7A98-063D-FB9D-485C-089023B4C16A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules\npm\node_modules\node-gyp">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp">
       <UniqueIdentifier>{77348C0E-2034-7791-74D5-63C077DF5A3B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules\npm\node_modules\node-gyp\src">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp\src">
       <UniqueIdentifier>{8CDEE807-BC53-E450-C8B8-4DEBB66742D4}</UniqueIdentifier>
     </Filter>
     <Filter Include="..">
@@ -51,8 +45,8 @@
     <ClCompile Include="..\src\electron-wallpaper.cc">
       <Filter>..\src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules\npm\node_modules\node-gyp\src\win_delay_load_hook.cc">
-      <Filter>C:\Users\joeyj\AppData\Roaming\nvm\v14.17.0\node_modules\npm\node_modules\node-gyp\src</Filter>
+    <ClCompile Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp\src\win_delay_load_hook.cc">
+      <Filter>C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp\src</Filter>
     </ClCompile>
     <None Include="..\binding.gyp">
       <Filter>..</Filter>
