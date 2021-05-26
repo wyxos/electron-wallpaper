@@ -39,6 +39,8 @@ ipcMain.on('attach', (event, params) => {
     const window = new BrowserWindow({
         width: 800,
         height: 600,
+        x: 1920,
+        y: 0,
         frame: false,
         title: 'Experimental-wallpaper'
     })
