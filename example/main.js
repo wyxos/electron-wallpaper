@@ -1,7 +1,7 @@
-const { app, BrowserWindow } = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
-function createWindow () {
+function createWindow() {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -12,6 +12,8 @@ function createWindow () {
 
     win.loadFile('index.html')
 }
+
+app.allowRendererProcessReuse = false
 
 app.whenReady().then(() => {
     createWindow()
@@ -27,4 +29,41 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
     }
+})
+
+const wallpaper = require('..')
+
+const windows = []
+
+ipcMain.on('attach', (event, params) => {
+    const window = new BrowserWindow({
+        width: 800,
+        height: 600,
+        frame: false,
+        title: 'Experimental-wallpaper'
+    })
+
+    window.loadFile('index.html')
+
+    const title = window.getTitle();
+
+    const attach = wallpaper.attach(title)
+
+    console.log(attach)
+
+    windows.push(title)
+})
+
+ipcMain.on('detach', (event, params) => {
+    if(!windows.length){
+        throw Error('No window to detach')
+    }
+
+    const title = windows[windows.length - 1];
+
+    const detach = wallpaper.detach(title)
+
+    console.log('detached', title)
+
+    windows.splice(windows.length - 1, 1)
 })
