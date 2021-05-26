@@ -1,5 +1,3 @@
-const wallpaper = require('../build/Release/ElectronWallpaper');
-
-console.log(wallpaper.attach())
+const wallpaper = require('bindings')('ElectronWallpaper')
 
 module.exports = wallpaper
