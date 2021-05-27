@@ -1,5 +1,8 @@
 //ElectronWallpaper.cc
 #include <node.h>
+#include <node_buffer.h>
+#include <node_version.h>
+#include <node_object_wrap.h>
 #include <iostream>
 #include <windows.h>
 #include <winuser.h>
@@ -38,17 +41,15 @@ namespace ElectronWallpaper {
     using v8::Context;
 
     void Attach(const FunctionCallbackInfo <Value> &args) {
-        Isolate *isolate = args.GetIsolate();
+        v8::Isolate* isolate = v8::Isolate::GetCurrent();
 
-        Local <Context> context = isolate->GetCurrentContext();
+        Local <Object> bufferObj = args[0].As<Object>();
 
-        Local <String> appName = args[0].As<String>();
+        unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
 
-        CHAR *charAppName = new CHAR[128];
+        unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
 
-        (*appName)->WriteUtf8(isolate, charAppName);
-
-        HWND target = FindWindowA(NULL, charAppName);
+        HWND target = (HWND)handle;
 
         HWND progman = FindWindowA("Progman", NULL);
 
@@ -72,19 +73,17 @@ namespace ElectronWallpaper {
     }
 
     void Detach(const FunctionCallbackInfo <Value> &args) {
-        Isolate *isolate = args.GetIsolate();
+        v8::Isolate* isolate = v8::Isolate::GetCurrent();
 
-        Local <Context> context = isolate->GetCurrentContext();
+        Local <Object> bufferObj = args[0].As<Object>();
 
-        Local <String> appName = args[0].As<String>();
+        unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
 
-        CHAR *charAppName = new CHAR[128];
+        unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
 
-        (*appName)->WriteUtf8(isolate, charAppName);
+        HWND target = (HWND)handle;
 
-        HWND target = FindWindowA(NULL, charAppName);
-
-        HWND previousParent = SetParent(target, workerw);
+        HWND previousParent = SetParent(target, NULL);
 
         args.GetReturnValue().Set(args[0]);
     }
