@@ -25,16 +25,16 @@
     <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules">
       <UniqueIdentifier>{56DF7A98-063D-FB9D-485C-089023B4C16A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild">
-      <UniqueIdentifier>{BFF076C8-AFEB-C7D4-3C7F-551213D89951}</UniqueIdentifier>
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\electron-rebuild">
+      <UniqueIdentifier>{5FD7C040-DC12-F9AE-929C-1B41BB589AB8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\electron-rebuild\node_modules">
       <UniqueIdentifier>{56DF7A98-063D-FB9D-485C-089023B4C16A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\electron-rebuild\node_modules\node-gyp">
       <UniqueIdentifier>{77348C0E-2034-7791-74D5-63C077DF5A3B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp\src">
+    <Filter Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\electron-rebuild\node_modules\node-gyp\src">
       <UniqueIdentifier>{8CDEE807-BC53-E450-C8B8-4DEBB66742D4}</UniqueIdentifier>
     </Filter>
     <Filter Include="..">
@@ -45,8 +45,8 @@
     <ClCompile Include="..\src\electron-wallpaper.cc">
       <Filter>..\src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp\src\win_delay_load_hook.cc">
-      <Filter>C:\code\personal\js\wyxos-electron-wallpaper\node_modules\prebuild\node_modules\node-gyp\src</Filter>
+    <ClCompile Include="C:\code\personal\js\wyxos-electron-wallpaper\node_modules\electron-rebuild\node_modules\node-gyp\src\win_delay_load_hook.cc">
+      <Filter>C:\code\personal\js\wyxos-electron-wallpaper\node_modules\electron-rebuild\node_modules\node-gyp\src</Filter>
     </ClCompile>
     <None Include="..\binding.gyp">
       <Filter>..</Filter>

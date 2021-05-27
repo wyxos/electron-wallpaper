@@ -35,8 +35,23 @@ const wallpaper = require('..')
 
 const windows = []
 
+const os = require("os")
+
+function getNativeWindowHandle_Int(win) {
+    let hbuf = win.getNativeWindowHandle()
+
+    if (os.endianness() == "LE") {
+        return hbuf.readInt32LE()
+    } else {
+        return hbuf.readInt32BE()
+    }
+}
+
 ipcMain.on('attach', (event, params) => {
     const window = new BrowserWindow({
+        webPreferences: {
+            contextIsolation: true
+        },
         width: 800,
         height: 600,
         x: 1920,
@@ -45,27 +60,37 @@ ipcMain.on('attach', (event, params) => {
         title: 'Experimental-wallpaper'
     })
 
-    window.loadFile('index.html')
-
     const title = window.getTitle();
 
-    const attach = wallpaper.attach(title)
+    const nativeHandle = window.getNativeWindowHandle();
 
-    console.log(attach)
+    window.loadFile('index.html')
 
-    windows.push(title)
+    console.log(nativeHandle)
+
+    console.log(getNativeWindowHandle_Int(window))
+
+    windows.push(window)
+
+    try {
+        wallpaper.attach(nativeHandle)
+    } catch (error) {
+        throw error
+    }
 })
 
 ipcMain.on('detach', (event, params) => {
-    if(!windows.length){
+    if (!windows.length) {
         throw Error('No window to detach')
     }
 
-    const title = windows[windows.length - 1];
+    const window = windows[windows.length - 1];
 
-    const detach = wallpaper.detach(title)
+    const nativeHandle = window.getNativeWindowHandle();
 
-    console.log('detached', title)
+    const detach = wallpaper.detach(nativeHandle)
+
+    console.log('detached', nativeHandle)
 
     windows.splice(windows.length - 1, 1)
 })
