@@ -40,7 +40,7 @@ const os = require("os")
 function getNativeWindowHandle_Int(win) {
     let hbuf = win.getNativeWindowHandle()
 
-    if (os.endianness() == "LE") {
+    if (os.endianness() === "LE") {
         return hbuf.readInt32LE()
     } else {
         return hbuf.readInt32BE()
