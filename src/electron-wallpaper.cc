@@ -65,7 +65,7 @@ namespace ElectronWallpaper {
 
         EnumWindows(&FindWorkerW, reinterpret_cast<LPARAM>(&workerw));
 
-        SetWindowLongPtrA(target, GWL_EXSTYLE, WS_EX_LAYERED);
+//        SetWindowLongPtrA(target, GWL_EXSTYLE, WS_EX_LAYERED);
 
         SetParent(target, workerw);
 
