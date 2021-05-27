@@ -35,18 +35,6 @@ const wallpaper = require('..')
 
 const windows = []
 
-const os = require("os")
-
-function getNativeWindowHandle_Int(win) {
-    let hbuf = win.getNativeWindowHandle()
-
-    if (os.endianness() === "LE") {
-        return hbuf.readInt32LE()
-    } else {
-        return hbuf.readInt32BE()
-    }
-}
-
 ipcMain.on('attach', (event, params) => {
     const window = new BrowserWindow({
         webPreferences: {
@@ -56,19 +44,12 @@ ipcMain.on('attach', (event, params) => {
         height: 600,
         x: 1920,
         y: 0,
-        frame: false,
-        title: 'Experimental-wallpaper'
+        frame: false
     })
-
-    const title = window.getTitle();
 
     const nativeHandle = window.getNativeWindowHandle();
 
     window.loadFile('index.html')
-
-    console.log(nativeHandle)
-
-    console.log(getNativeWindowHandle_Int(window))
 
     windows.push(window)
 
@@ -91,6 +72,8 @@ ipcMain.on('detach', (event, params) => {
     const detach = wallpaper.detach(nativeHandle)
 
     console.log('detached', nativeHandle)
+
+    window.close()
 
     windows.splice(windows.length - 1, 1)
 })
