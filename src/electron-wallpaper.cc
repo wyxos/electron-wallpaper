@@ -1,16 +1,27 @@
-//ElectronWallpaper.cc
+/*
+ * Copyright 2018 Joey J <maverick.slayer@live.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+#include <v8.h>
 #include <node.h>
 #include <node_buffer.h>
 #include <node_version.h>
 #include <node_object_wrap.h>
-#include <iostream>
+#include <napi.h>
 #include <windows.h>
 #include <winuser.h>
 #include <iostream>
-#include <v8.h>
-#include <napi.h>
-
-using namespace std;
 
 HWND workerw = NULL;
 
@@ -48,11 +59,9 @@ namespace ElectronWallpaper {
 
         unsigned char *bufferData = (unsigned char *) node::Buffer::Data(bufferObj);
 
-        unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
+        int64_t handle = *reinterpret_cast<int64_t *>(bufferData);
 
-        HWND
-        target = (HWND)
-        handle;
+        HWND target = (HWND) handle;
 
         HWND progman = FindWindowA("Progman", NULL);
 
@@ -63,8 +72,7 @@ namespace ElectronWallpaper {
                 NULL,
                 SMTO_NORMAL,
                 1000,
-                NULL
-        );
+                NULL);
 
         EnumWindows(&FindWorkerW, reinterpret_cast<LPARAM>(&workerw));
 
@@ -100,7 +108,7 @@ namespace ElectronWallpaper {
 
         unsigned char *bufferData = (unsigned char *) node::Buffer::Data(bufferObj);
 
-        unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
+        int64_t handle = *reinterpret_cast<int64_t *>(bufferData);
 
         HWND
         target = (HWND)
@@ -116,6 +124,5 @@ namespace ElectronWallpaper {
         NODE_SET_METHOD(exports, "detach", Detach);
     }
 
-    NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize
-    );
-}
+    NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize);
+}  //  namespace ElectronWallpaper
