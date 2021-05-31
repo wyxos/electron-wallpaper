@@ -2,7 +2,7 @@
     "targets" : [
         {
             "target_name": "ElectronWallpaper",
-            "sources": ["src/electron-wallpaper.cc"],
+            "sources": ["src/main.cc"],
             "cflags!": [ "-fno-exceptions" ],
             "cflags_cc!": [ "-fno-exceptions" ],
             "include_dirs": [
