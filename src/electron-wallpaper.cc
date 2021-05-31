@@ -8,6 +8,7 @@
 #include <winuser.h>
 #include <iostream>
 #include <v8.h>
+#include <napi.h>
 
 using namespace std;
 
@@ -25,7 +26,6 @@ workerw = FindWindowEx(NULL, hwnd, "WorkerW", NULL);
 return
 FALSE;
 }
-
 return
 TRUE;
 }
@@ -39,17 +39,20 @@ namespace ElectronWallpaper {
     using v8::Value;
     using v8::String;
     using v8::Context;
+    using v8::Integer;
 
     void Attach(const FunctionCallbackInfo <Value> &args) {
-        v8::Isolate* isolate = v8::Isolate::GetCurrent();
+        v8::Isolate *isolate = v8::Isolate::GetCurrent();
 
         Local <Object> bufferObj = args[0].As<Object>();
 
-        unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
+        unsigned char *bufferData = (unsigned char *) node::Buffer::Data(bufferObj);
 
         unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
 
-        HWND target = (HWND)handle;
+        HWND
+        target = (HWND)
+        handle;
 
         HWND progman = FindWindowA("Progman", NULL);
 
@@ -67,21 +70,41 @@ namespace ElectronWallpaper {
 
 //        SetWindowLongPtrA(target, GWL_EXSTYLE, WS_EX_LAYERED);
 
+        Local <Integer> originalX = args[1].As<Integer>();
+
+        Local <Integer> originalY = args[2].As<Integer>();
+
+        int x = originalX;
+
+        int y = originalY;
+
+        SetWindowPos(
+                target,
+                HWND_TOP,
+                x,
+                y,
+                NULL,
+                NULL,
+                NULL
+        );
+
         SetParent(target, workerw);
 
         args.GetReturnValue().Set(args[0]);
     }
 
     void Detach(const FunctionCallbackInfo <Value> &args) {
-        v8::Isolate* isolate = v8::Isolate::GetCurrent();
+        v8::Isolate *isolate = v8::Isolate::GetCurrent();
 
         Local <Object> bufferObj = args[0].As<Object>();
 
-        unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
+        unsigned char *bufferData = (unsigned char *) node::Buffer::Data(bufferObj);
 
         unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
 
-        HWND target = (HWND)handle;
+        HWND
+        target = (HWND)
+        handle;
 
         HWND previousParent = SetParent(target, NULL);
 
