@@ -70,23 +70,23 @@ namespace ElectronWallpaper {
 
 //        SetWindowLongPtrA(target, GWL_EXSTYLE, WS_EX_LAYERED);
 
-        Local <Integer> originalX = args[1].As<Integer>();
+//        Local <Integer> originalX = args[1].As<Integer>();
 
-        Local <Integer> originalY = args[2].As<Integer>();
+//        Local <Integer> originalY = args[2].As<Integer>();
 
-        int x = originalX;
+//        int x = originalX;
 
-        int y = originalY;
+//        int y = originalY;
 
-        SetWindowPos(
-                target,
-                HWND_TOP,
-                x,
-                y,
-                NULL,
-                NULL,
-                NULL
-        );
+//        SetWindowPos(
+//                target,
+//                HWND_TOP,
+//                x,
+//                y,
+//                NULL,
+//                NULL,
+//                NULL
+//        );
 
         SetParent(target, workerw);
 
