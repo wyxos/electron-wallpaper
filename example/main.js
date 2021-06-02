@@ -3,18 +3,26 @@ const {
   BrowserWindow,
   ipcMain
 } = require('electron')
+
 const path = require('path')
+
+const wallpaper = require('..')
 
 function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    transparent: true,
+    frame: false,
+    backgroundColor: '#18307f',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
   win.loadFile('index.html')
+
+  wallpaper.attach(win.getNativeWindowHandle(), 0, 0)
 }
 
 app.allowRendererProcessReuse = false
@@ -35,8 +43,6 @@ app.on('window-all-closed', () => {
   }
 })
 
-const wallpaper = require('..')
-
 const windows = []
 
 ipcMain.on('attach', (event, params) => {
@@ -46,8 +52,9 @@ ipcMain.on('attach', (event, params) => {
     },
     width: 800,
     height: 600,
-    x: 1920,
-    y: 0,
+    backgroundColor: '#ff0000',
+    // x: -1920,
+    // y: 0,
     transparent: true,
     frame: false
   })
@@ -58,7 +65,7 @@ ipcMain.on('attach', (event, params) => {
 
   windows.push(window)
 
-  wallpaper.attach(nativeHandle, 1920, 0)
+  wallpaper.attach(nativeHandle, 0, 0)
 })
 
 ipcMain.on('detach', (event, params) => {
@@ -74,7 +81,7 @@ ipcMain.on('detach', (event, params) => {
 
   console.log('detached', nativeHandle)
 
-  window.close()
+  // window.close()
 
   windows.splice(windows.length - 1, 1)
 })
