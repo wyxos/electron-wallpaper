@@ -18,9 +18,9 @@
 #include <windows.h>
 namespace wallpaper
 {
-    bool attach(HWND handle, int x, int y);
+    bool attach(HWND handle, int x, int y, int cx, int cy);
     bool detach(HWND handle);
-    bool setPosition(HWND handle, int x, int y);
+    bool setPosition(HWND handle, int x, int y, int cx, int cy);
     POINT getCoordinate(int x, int y);
 
     Napi::Boolean AttachWrapped(const Napi::CallbackInfo &info);

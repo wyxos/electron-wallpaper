@@ -22,7 +22,7 @@ function createWindow() {
 
   win.loadFile('index.html')
 
-  wallpaper.attach(win.getNativeWindowHandle(), 0, 0)
+  wallpaper.attach(win.getNativeWindowHandle(), -1920, 0, 1920, 1080)
 
   // setTimeout(() => {
   //   wallpaper.setPosition(win.getNativeWindowHandle(), -1920, 0)
