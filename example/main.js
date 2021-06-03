@@ -8,7 +8,7 @@ const path = require('path')
 
 const wallpaper = require('..')
 
-function createWindow () {
+function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -23,6 +23,14 @@ function createWindow () {
   win.loadFile('index.html')
 
   wallpaper.attach(win.getNativeWindowHandle(), 0, 0)
+
+  setTimeout(() => {
+    wallpaper.setPosition(win.getNativeWindowHandle(), -1920, 0)
+  }, 5000)
+
+  setTimeout(() => {
+    wallpaper.detach(win.getNativeWindowHandle())
+  }, 10000)
 }
 
 app.allowRendererProcessReuse = false
