@@ -34,7 +34,7 @@ BOOL CALLBACK FindWorkerW(HWND hwnd, LPARAM param)
     return TRUE;
 }
 
-bool wallpaper::attach(HWND handle, int x, int y)
+bool wallpaper::attach(HWND handle, int x, int y, int cx, int cy)
 {
     HWND progman = FindWindowA("Progman", NULL);
 
@@ -49,18 +49,9 @@ bool wallpaper::attach(HWND handle, int x, int y)
 
     EnumWindows(&FindWorkerW, reinterpret_cast<LPARAM>(&workerW));
 
-    SetWindowPos(
-        handle,
-        workerW,
-        x,
-        y,
-        NULL,
-        NULL,
-        SWP_NOSIZE);
-
     SetParent(handle, workerW);
 
-    return wallpaper::setPosition(handle, x, y);
+    return wallpaper::setPosition(handle, x, y, cx, cy);
 }
 
 bool wallpaper::detach(HWND handle)
@@ -70,7 +61,7 @@ bool wallpaper::detach(HWND handle)
     return true;
 }
 
-bool wallpaper::setPosition(HWND handle, int x, int y)
+bool wallpaper::setPosition(HWND handle, int x, int y, int cx, int cy)
 {
     if (!workerW)
     {
@@ -85,7 +76,7 @@ bool wallpaper::setPosition(HWND handle, int x, int y)
 
     ScreenToClient(workerW, &pt);
 
-    SetWindowPos(handle, HWND_TOP, pt.x, pt.y, NULL, NULL, SWP_NOSIZE);
+    SetWindowPos(handle, HWND_TOP, pt.x, pt.y, cx, cy, NULL);
 
     return true;
 }
@@ -112,25 +103,29 @@ Napi::Boolean wallpaper::AttachWrapped(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
 
-    if (info.Length() < 3)
+    if (info.Length() < 5)
     {
         Napi::TypeError::New(env, "Argument missing.").ThrowAsJavaScriptException();
     }
 
     if (!info[1].IsNumber() || !info[2].IsNumber())
     {
-        Napi::TypeError::New(env, "Argument 2 and 3 should to be integers.").ThrowAsJavaScriptException();
+        Napi::TypeError::New(env, "Argument 2 to 5 should to be integers.").ThrowAsJavaScriptException();
     }
 
     Napi::Number x = info[1].As<Napi::Number>();
 
     Napi::Number y = info[2].As<Napi::Number>();
 
+    Napi::Number cx = info[3].As<Napi::Number>();
+
+    Napi::Number cy = info[4].As<Napi::Number>();
+
     Napi::Buffer<void *> handle = info[0].As<Napi::Buffer<void *>>();
 
     HWND target = static_cast<HWND>(*reinterpret_cast<void **>(handle.Data()));
 
-    bool value = wallpaper::attach(target, x, y);
+    bool value = wallpaper::attach(target, x, y, cx, cy);
 
     return Napi::Boolean::New(env, value);
 }
@@ -171,11 +166,15 @@ Napi::Boolean wallpaper::SetPositionWrapped(const Napi::CallbackInfo &info)
 
     Napi::Number y = info[2].As<Napi::Number>();
 
+    Napi::Number cx = info[3].As<Napi::Number>();
+
+    Napi::Number cy = info[4].As<Napi::Number>();
+
     Napi::Buffer<void *> handle = info[0].As<Napi::Buffer<void *>>();
 
     HWND target = static_cast<HWND>(*reinterpret_cast<void **>(handle.Data()));
 
-    bool value = wallpaper::setPosition(target, x, y);
+    bool value = wallpaper::setPosition(target, x, y, cx, cy);
 
     return Napi::Boolean::New(env, value);
 }
