@@ -16,15 +16,16 @@
 
 #include <napi.h>
 #include <windows.h>
-namespace wallpaper {
-    bool attach(Napi::Buffer<void *> handle, int x, int y);
-    bool detach(Napi::Buffer<void *> handle);
-    bool setPosition(Napi::Buffer<void *> handle, int x, int y);
+namespace wallpaper
+{
+    bool attach(HWND handle, int x, int y);
+    bool detach(HWND handle);
+    bool setPosition(HWND handle, int x, int y);
     RECT getLocalCoordinates(HWND handle);
 
-    Napi::Boolean AttachWrapped(const Napi::CallbackInfo& info);
-    Napi::Boolean DetachWrapped(const Napi::CallbackInfo& info);
-    Napi::Boolean SetPositionWrapped(const Napi::CallbackInfo& info);
+    Napi::Boolean AttachWrapped(const Napi::CallbackInfo &info);
+    Napi::Boolean DetachWrapped(const Napi::CallbackInfo &info);
+    Napi::Boolean SetPositionWrapped(const Napi::CallbackInfo &info);
 
     Napi::Object Init(Napi::Env env, Napi::Object exports);
-}  // namespace wallpaper
+} // namespace wallpaper
