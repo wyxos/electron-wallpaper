@@ -21,11 +21,12 @@ namespace wallpaper
     bool attach(HWND handle, int x, int y);
     bool detach(HWND handle);
     bool setPosition(HWND handle, int x, int y);
-    RECT getLocalCoordinates(HWND handle);
+    POINT getCoordinate(int x, int y);
 
     Napi::Boolean AttachWrapped(const Napi::CallbackInfo &info);
     Napi::Boolean DetachWrapped(const Napi::CallbackInfo &info);
     Napi::Boolean SetPositionWrapped(const Napi::CallbackInfo &info);
+    Napi::Object GetCoordinateWrapped(const Napi::CallbackInfo &info);
 
     Napi::Object Init(Napi::Env env, Napi::Object exports);
 } // namespace wallpaper

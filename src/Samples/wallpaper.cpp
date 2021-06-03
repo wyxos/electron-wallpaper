@@ -22,8 +22,7 @@
 
 HWND workerW = NULL;
 
-BOOL CALLBACK
-FindWorkerW(HWND hwnd, LPARAM param)
+BOOL CALLBACK FindWorkerW(HWND hwnd, LPARAM param)
 {
     HWND shelldll = FindWindowEx(hwnd, NULL, "SHELLDLL_DefView", NULL);
 
@@ -33,14 +32,6 @@ FindWorkerW(HWND hwnd, LPARAM param)
         return FALSE;
     }
     return TRUE;
-}
-
-RECT wallpaper::getLocalCoordinates(HWND hWnd)
-{
-    RECT Rect;
-    GetWindowRect(hWnd, &Rect);
-    MapWindowPoints(HWND_DESKTOP, GetParent(hWnd), (LPPOINT)&Rect, 2);
-    return Rect;
 }
 
 bool wallpaper::attach(HWND handle, int x, int y)
@@ -97,6 +88,24 @@ bool wallpaper::setPosition(HWND handle, int x, int y)
     SetWindowPos(handle, HWND_TOP, pt.x, pt.y, NULL, NULL, SWP_NOSIZE);
 
     return true;
+}
+
+POINT wallpaper::getCoordinate(int x, int y)
+{
+    if (!workerW)
+    {
+        EnumWindows(&FindWorkerW, reinterpret_cast<LPARAM>(&workerW));
+    }
+
+    POINT pt = {};
+
+    pt.x = x;
+
+    pt.y = y;
+
+    ScreenToClient(workerW, &pt);
+
+    return pt;
 }
 
 Napi::Boolean wallpaper::AttachWrapped(const Napi::CallbackInfo &info)
@@ -171,11 +180,41 @@ Napi::Boolean wallpaper::SetPositionWrapped(const Napi::CallbackInfo &info)
     return Napi::Boolean::New(env, value);
 }
 
+Napi::Object wallpaper::GetCoordinateWrapped(const Napi::CallbackInfo &info)
+{
+    Napi::Env env = info.Env();
+
+    if (info.Length() < 2)
+    {
+        Napi::TypeError::New(env, "Argument missing.").ThrowAsJavaScriptException();
+    }
+
+    if (!info[0].IsNumber() || !info[1].IsNumber())
+    {
+        Napi::TypeError::New(env, "Argument 1 and 2 should to be integers.").ThrowAsJavaScriptException();
+    }
+
+    Napi::Number x = info[0].As<Napi::Number>();
+
+    Napi::Number y = info[1].As<Napi::Number>();
+
+    POINT value = wallpaper::getCoordinate(x, y);
+
+    Napi::Object object = Napi::Object::New(env);
+
+    object.Set("x", value.x);
+
+    object.Set("y", value.y);
+
+    return object;
+}
+
 Napi::Object wallpaper::Init(Napi::Env env, Napi::Object exports)
 {
     exports.Set("attach", Napi::Function::New(env, wallpaper::AttachWrapped));
     exports.Set("detach", Napi::Function::New(env, wallpaper::DetachWrapped));
     exports.Set("setPosition", Napi::Function::New(env, wallpaper::SetPositionWrapped));
+    exports.Set("getCoordinate", Napi::Function::New(env, wallpaper::GetCoordinateWrapped));
 
     return exports;
 }

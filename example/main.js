@@ -24,13 +24,17 @@ function createWindow() {
 
   wallpaper.attach(win.getNativeWindowHandle(), 0, 0)
 
-  setTimeout(() => {
-    wallpaper.setPosition(win.getNativeWindowHandle(), -1920, 0)
-  }, 5000)
+  // setTimeout(() => {
+  //   wallpaper.setPosition(win.getNativeWindowHandle(), -1920, 0)
+  // }, 5000)
 
-  setTimeout(() => {
-    wallpaper.detach(win.getNativeWindowHandle())
-  }, 10000)
+  // setTimeout(() => {
+  //   wallpaper.detach(win.getNativeWindowHandle())
+  // }, 10000)
+
+  console.log(wallpaper.getCoordinate(-1920, -576))
+  console.log(wallpaper.getCoordinate(0, 0))
+  console.log(wallpaper.getCoordinate(1920, -576))
 }
 
 app.allowRendererProcessReuse = false
