@@ -8,13 +8,13 @@ const path = require('path')
 
 const wallpaper = require('..')
 
-function createWindow() {
+function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     transparent: true,
     frame: false,
-    backgroundColor: '#18307f',
+    // backgroundColor: '#18307f',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -22,7 +22,11 @@ function createWindow() {
 
   win.loadFile('index.html')
 
-  wallpaper.attach(win.getNativeWindowHandle(), -1920, 0, 1920, 1080)
+  wallpaper.attach(win.getNativeWindowHandle(), -1920, 0, 400, 400)
+
+  win.on('close', function () {
+    wallpaper.detach(win.getNativeWindowHandle())
+  })
 
   // setTimeout(() => {
   //   wallpaper.setPosition(win.getNativeWindowHandle(), -1920, 0)

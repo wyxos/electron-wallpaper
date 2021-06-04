@@ -38,11 +38,11 @@ bool wallpaper::attach(HWND handle, int x, int y, int cx, int cy)
 {
     HWND progman = FindWindowA("Progman", NULL);
 
-    LRESULT result = SendMessageTimeoutA(
+    SendMessageTimeoutA(
         progman,
         0x052C,
-        NULL,
-        NULL,
+0xD,
+        0x1,
         SMTO_NORMAL,
         1000,
         NULL);
