@@ -13,7 +13,7 @@
     "rebuild": "node-gyp rebuild",
     "rebuild-electron": "electron-rebuild -f",
     "install": "prebuild-install || node-gyp rebuild",
-    "prebuild-release": "prebuild -t 11.0.0 -t 12.0.9 -r electron --verbose"
+    "prebuild-release": "prebuild -r electron --verbose"
   },
   "keywords": [],
   "author": "",
